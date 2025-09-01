@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import LanguageSelector from './LanguageSelector'
+import ExchangeRateBanner from './ExchangeRateBanner'
 
 function Layout({ children }) {
   const { t } = useTranslation()
@@ -13,6 +14,7 @@ function Layout({ children }) {
         <h1 className="app-title">{t('wallet.title')}</h1>
         <LanguageSelector />
       </header>
+      <ExchangeRateBanner />
       <main id="main-content" className="app-main">
         {children}
       </main>

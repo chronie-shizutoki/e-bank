@@ -86,5 +86,10 @@
   },
   "accessibility": {
     "skipToMain": "跳转到主要内容"
+  },
+  "exchangeRate": {
+    "title": "汇率信息",
+    "rate": "1美元 = {{rate}} 此货币",
+    "lastUpdated": "最后更新: {{time}}"
   }
 }

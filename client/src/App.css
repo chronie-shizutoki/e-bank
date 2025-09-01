@@ -80,6 +80,40 @@ body {
   font-weight: 600;
 }
 
+/* Exchange Rate Banner */
+.exchange-rate-banner {
+  background-color: var(--color-info-bg);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.exchange-rate-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.exchange-rate-label {
+  font-weight: 500;
+}
+
+.exchange-rate-value {
+  color: var(--color-text);
+  font-weight: 600;
+  font-family: monospace;
+}
+
+.exchange-rate-update-time {
+  font-size: 0.8rem;
+  color: var(--color-text-subtle);
+}
+
 .app-main {
   flex: 1;
   padding: 1rem;
