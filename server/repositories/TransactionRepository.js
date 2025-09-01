@@ -27,7 +27,7 @@ class TransactionRepository {
     } = transactionData;
     
     // 验证交易类型
-    const validTypes = ['transfer', 'initial_deposit', 'interest_credit', 'interest_debit'];
+    const validTypes = ['transfer', 'initial_deposit', 'interest_credit', 'interest_debit', 'third_party_payment', 'third_party_receipt'];
     if (!validTypes.includes(transactionType)) {
       throw new Error('无效的交易类型');
     }
@@ -178,24 +178,57 @@ class TransactionRepository {
   }
 
   /**
-   * 获取交易总数
-   * @param {string} type - 交易类型过滤（可选）
+   * 计算交易总数
+   * @param {string} type - 可选，交易类型过滤
    * @returns {Promise<number>} 交易总数
    */
-  async count(type = null) {
-    let sql = 'SELECT COUNT(*) as count FROM transactions';
-    const params = [];
-    
-    if (type) {
-      sql += ' WHERE transaction_type = ?';
-      params.push(type);
-    }
-    
+  async count(type) {
     try {
+      let sql = 'SELECT COUNT(*) as count FROM transactions';
+      let params = [];
+      
+      if (type) {
+        if (Array.isArray(type)) {
+          sql += ' WHERE transaction_type IN (' + type.map(() => '?').join(', ') + ')';
+          params = [...type];
+        } else {
+          sql += ' WHERE transaction_type = ?';
+          params = [type];
+        }
+      }
+      
       const result = await dbAsync.get(sql, params);
       return result.count;
     } catch (error) {
-      throw new Error(`获取交易总数失败: ${error.message}`);
+      throw new Error(`计算交易总数失败: ${error.message}`);
+    }
+  }
+
+  /**
+   * 计算特定钱包的交易总数
+   * @param {string} walletId - 钱包ID
+   * @param {string|Array} type - 可选，交易类型过滤
+   * @returns {Promise<number>} 交易总数
+   */
+  async countByWalletId(walletId, type) {
+    try {
+      let sql = 'SELECT COUNT(*) as count FROM transactions WHERE from_wallet_id = ? OR to_wallet_id = ?';
+      let params = [walletId, walletId];
+      
+      if (type) {
+        if (Array.isArray(type)) {
+          sql += ' AND transaction_type IN (' + type.map(() => '?').join(', ') + ')';
+          params = [...params, ...type];
+        } else {
+          sql += ' AND transaction_type = ?';
+          params = [...params, type];
+        }
+      }
+      
+      const result = await dbAsync.get(sql, params);
+      return result.count;
+    } catch (error) {
+      throw new Error(`计算钱包交易总数失败: ${error.message}`);
     }
   }
 

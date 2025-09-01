@@ -24,7 +24,8 @@ CREATE TABLE transactions (
   from_wallet_id UUID REFERENCES wallets(id),
   to_wallet_id UUID REFERENCES wallets(id),
   amount DECIMAL(15,2) NOT NULL,
-  transaction_type VARCHAR(20) NOT NULL, -- 'transfer', 'initial_deposit'
+  transaction_type VARCHAR(20) NOT NULL,
+  -- 交易类型: 'transfer', 'initial_deposit', 'interest_credit', 'interest_debit', 'third_party_payment', 'third_party_receipt'
   description TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

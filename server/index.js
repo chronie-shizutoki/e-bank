@@ -72,6 +72,7 @@ app.use('/api/transfers', require('./routes/transfers'));
 app.use('/api/transactions', require('./routes/transactions'));
 app.use('/api/interests', require('./routes/interests'));
 app.use('/api/exchange-rates', require('./routes/exchangeRates'));
+app.use('/api/third-party', require('./routes/thirdPartyPayments'));
 
 // Error handling middleware
 app.use((err, req, res, next) => {
