@@ -17,7 +17,11 @@
     "enterUsername": "请输入用户名",
     "noAccount": "还没有钱包？",
     "hasAccount": "已有钱包？",
-    "logout": "退出登录"
+    "logout": "退出登录",
+    "createdAt": "创建时间",
+    "walletId": "钱包ID",
+    "balanceLow": "余额较低",
+    "balanceSufficient": "余额充足"
   },
   "transfer": {
     "recipient": "收款人",
@@ -79,5 +83,8 @@
   "language": {
     "select": "选择语言",
     "current": "当前语言"
+  },
+  "accessibility": {
+    "skipToMain": "跳转到主要内容"
   }
 }

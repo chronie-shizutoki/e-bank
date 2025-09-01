@@ -17,7 +17,11 @@
     "enterUsername": "Enter your username",
     "noAccount": "Don't have a wallet?",
     "hasAccount": "Already have a wallet?",
-    "logout": "Logout"
+    "logout": "Logout",
+    "createdAt": "Created At",
+    "walletId": "Wallet ID",
+    "balanceLow": "Balance is low",
+    "balanceSufficient": "Balance is sufficient"
   },
   "transfer": {
     "recipient": "Recipient",
@@ -79,5 +83,8 @@
   "language": {
     "select": "Select Language",
     "current": "Current Language"
+  },
+  "accessibility": {
+    "skipToMain": "Skip to main content"
   }
 }

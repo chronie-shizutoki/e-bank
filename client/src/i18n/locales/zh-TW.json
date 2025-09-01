@@ -17,7 +17,11 @@
     "enterUsername": "請輸入用戶名",
     "noAccount": "還沒有錢包？",
     "hasAccount": "已有錢包？",
-    "logout": "退出登錄"
+    "logout": "退出登錄",
+    "createdAt": "創建時間",
+    "walletId": "錢包ID",
+    "balanceLow": "餘額較低",
+    "balanceSufficient": "餘額充足"
   },
   "transfer": {
     "recipient": "收款人",
@@ -79,5 +83,8 @@
   "language": {
     "select": "選擇語言",
     "current": "當前語言"
+  },
+  "accessibility": {
+    "skipToMain": "跳轉到主要內容"
   }
 }

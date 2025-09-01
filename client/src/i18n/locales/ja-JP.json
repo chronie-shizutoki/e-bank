@@ -17,7 +17,11 @@
     "enterUsername": "ユーザー名を入力してください",
     "noAccount": "ウォレットをお持ちでない方は？",
     "hasAccount": "既にウォレットをお持ちの方は？",
-    "logout": "ログアウト"
+    "logout": "ログアウト",
+    "createdAt": "作成日時",
+    "walletId": "ウォレットID",
+    "balanceLow": "残高が少ない",
+    "balanceSufficient": "残高が十分"
   },
   "transfer": {
     "recipient": "受取人",
@@ -79,5 +83,8 @@
   "language": {
     "select": "言語を選択",
     "current": "現在の言語"
+  },
+  "accessibility": {
+    "skipToMain": "メインコンテンツにスキップ"
   }
 }

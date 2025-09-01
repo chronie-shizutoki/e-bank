@@ -89,12 +89,12 @@ function WalletDashboard() {
               )}
               {currentWallet.balance > 0 && currentWallet.balance < 100 && (
                 <span className="balance-status balance-status--low">
-                  余额较低
+                  {t('wallet.balanceLow')}
                 </span>
               )}
               {currentWallet.balance >= 100 && (
                 <span className="balance-status balance-status--positive">
-                  余额充足
+                  {t('wallet.balanceSufficient')}
                 </span>
               )}
             </div>
@@ -124,13 +124,13 @@ function WalletDashboard() {
 
         <div className="wallet-dashboard__info">
           <div className="info-item">
-            <span className="info-label">创建时间:</span>
+            <span className="info-label">{t('wallet.createdAt')}:</span>
             <span className="info-value">
               {new Date(currentWallet.createdAt || Date.now()).toLocaleDateString()}
             </span>
           </div>
           <div className="info-item">
-            <span className="info-label">钱包ID:</span>
+            <span className="info-label">{t('wallet.walletId')}:</span>
             <span className="info-value">{currentWallet.id}</span>
           </div>
         </div>
