@@ -46,14 +46,12 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--color-bg);
   color: var(--color-text);
   line-height: 1.5;
+  width: 100%;
 }
 
 /* App Layout */
@@ -85,9 +83,12 @@ body {
 .app-main {
   flex: 1;
   padding: 1rem;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 /* Skip to main content */
@@ -192,6 +193,7 @@ body {
   align-items: center;
   min-height: 60vh;
   padding: 1rem;
+  width: 100%;
 }
 
 .wallet-setup__container {
@@ -199,8 +201,7 @@ body {
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
+  width: 70%;
 }
 
 .wallet-setup__title {
@@ -354,8 +355,8 @@ body {
 /* Wallet Dashboard Component */
 .wallet-dashboard {
   padding: 1rem;
-  max-width: 800px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .wallet-dashboard__container {
@@ -561,7 +562,6 @@ body {
   border-radius: 8px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   width: 100%;
-  max-width: 500px;
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
@@ -724,8 +724,9 @@ body {
 /* Transaction History Component */
 .transaction-history {
   padding: 1rem;
-  max-width: 800px;
+  max-width: min(1000px, 95vw);
   margin: 0 auto;
+  width: 100%;
 }
 
 .transaction-history-header {
@@ -926,6 +927,16 @@ body {
 }
 
 /* Responsive Design */
+@media (min-width: 480px) {
+  .wallet-setup__container {
+    max-width: min(450px, 85vw);
+  }
+  
+  .transfer-form {
+    max-width: min(550px, 85vw);
+  }
+}
+
 @media (min-width: 768px) {
   .app-header {
     padding: 1rem 2rem;
@@ -938,7 +949,10 @@ body {
   
   .app-main {
     padding: 2rem;
-    max-width: 1000px;
+  }
+  
+  .wallet-setup__container {
+    max-width: min(500px, 70vw);
   }
   
   .wallet-dashboard {
@@ -985,6 +999,10 @@ body {
     min-width: 100px;
   }
   
+  .transfer-form {
+    max-width: min(600px, 60vw);
+  }
+  
   .transfer-form__actions {
     flex-direction: row;
     justify-content: flex-end;
@@ -1016,12 +1034,20 @@ body {
 
 @media (min-width: 1200px) {
   .app-main {
-    max-width: 1200px;
+    max-width: 1400px;
   }
   
   .wallet-dashboard,
   .transaction-history {
-    max-width: 1000px;
+    max-width: min(1200px, 80vw);
+  }
+  
+  .wallet-setup__container {
+    max-width: min(600px, 50vw);
+  }
+  
+  .transfer-form {
+    max-width: min(700px, 50vw);
   }
 }
 
