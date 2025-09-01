@@ -10,8 +10,8 @@ class InterestService {
   constructor() {
     this.walletRepo = new WalletRepository();
     this.transactionRepo = new TransactionRepository();
-    // 默认日利率 (0.01% = 0.0001)
-    this.dailyInterestRate = 0.0001;
+    // 默认日利率 (-1% = -0.01)
+    this.dailyInterestRate = -0.01;
   }
 
   /**
