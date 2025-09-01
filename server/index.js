@@ -8,6 +8,9 @@ require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const { initializeDatabase } = require('./config/initDatabase');
 
+// 导入利息调度器
+const interestScheduler = require('./services/InterestScheduler');
+
 const app = express();
 
 // 调试环境变量
@@ -52,6 +55,7 @@ app.get('/api/status', async (req, res) => {
       timestamp: new Date().toISOString() 
     });
   } catch (error) {
+    console.error('获取数据库状态失败:', error);
     res.status(500).json({ 
       status: 'ERROR', 
       error: error.message,
@@ -64,6 +68,7 @@ app.get('/api/status', async (req, res) => {
 app.use('/api/wallets', require('./routes/wallets'));
 app.use('/api/transfers', require('./routes/transfers'));
 app.use('/api/transactions', require('./routes/transactions'));
+app.use('/api/interests', require('./routes/interests'));
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -79,7 +84,7 @@ app.use('*', (req, res) => {
   res.status(404).json({ error: 'Route not found' });
 });
 
-// Initialize database and start server
+// 初始化数据库和启动服务器
 async function startServer() {
   try {
     console.log('正在初始化数据库...');
@@ -90,12 +95,23 @@ async function startServer() {
       process.exit(1);
     }
     
-    app.listen(PORT, '0.0.0.0', () => {
+    app.listen(PORT, '0.0.0.0', async () => {
       console.log(`服务器运行在端口 ${PORT}`);
       console.log(`环境: ${process.env.NODE_ENV || 'development'}`);
       console.log(`本地访问: http://localhost:${PORT}/api/health`);
       console.log(`局域网访问: http://0.0.0.0:${PORT}/api/health`);
       console.log(`数据库状态: http://localhost:${PORT}/api/status`);
+      
+      // 启动利息调度器
+      try {
+        const schedulerResult = await interestScheduler.start();
+        if (!schedulerResult.success) {
+          console.warn('利息调度器启动失败，但服务器继续运行');
+        }
+      } catch (error) {
+        console.error('启动利息调度器时发生异常:', error);
+        console.warn('利息调度器无法启动，但服务器继续运行');
+      }
     });
   } catch (error) {
     console.error('服务器启动失败:', error.message);

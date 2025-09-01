@@ -27,7 +27,7 @@ class TransactionRepository {
     } = transactionData;
     
     // 验证交易类型
-    const validTypes = ['transfer', 'initial_deposit'];
+    const validTypes = ['transfer', 'initial_deposit', 'interest_credit', 'interest_debit'];
     if (!validTypes.includes(transactionType)) {
       throw new Error('无效的交易类型');
     }
@@ -314,6 +314,40 @@ class TransactionRepository {
       toWalletId,
       amount,
       transactionType: 'initial_deposit',
+      description
+    });
+  }
+
+  /**
+   * 创建利息收入交易记录
+   * @param {string} toWalletId - 接收方钱包ID
+   * @param {number} amount - 利息金额
+   * @param {string} description - 交易描述
+   * @returns {Promise<Object>} 创建的交易对象
+   */
+  async createInterestCredit(toWalletId, amount, description = '利息收入') {
+    return await this.create({
+      fromWalletId: null,
+      toWalletId,
+      amount,
+      transactionType: 'interest_credit',
+      description
+    });
+  }
+
+  /**
+   * 创建利息支出交易记录
+   * @param {string} toWalletId - 接收方钱包ID
+   * @param {number} amount - 利息金额
+   * @param {string} description - 交易描述
+   * @returns {Promise<Object>} 创建的交易对象
+   */
+  async createInterestDebit(toWalletId, amount, description = '利息支出') {
+    return await this.create({
+      fromWalletId: null,
+      toWalletId,
+      amount,
+      transactionType: 'interest_debit',
       description
     });
   }

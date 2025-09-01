@@ -80,10 +80,18 @@ class WalletRepository {
     const { limit = 50, offset = 0 } = options;
     
     try {
-      const wallets = await dbAsync.all(
-        'SELECT * FROM wallets ORDER BY created_at DESC LIMIT ? OFFSET ?',
-        [limit, offset]
-      );
+      // 处理limit为null的情况
+      const actualLimit = limit === null ? 0 : limit;
+      const actualOffset = offset || 0;
+      
+      // 当limit为0时，表示不限制数量
+      const query = actualLimit > 0 
+        ? 'SELECT * FROM wallets ORDER BY created_at DESC LIMIT ? OFFSET ?' 
+        : 'SELECT * FROM wallets ORDER BY created_at DESC';
+      
+      const params = actualLimit > 0 ? [actualLimit, actualOffset] : [];
+      
+      const wallets = await dbAsync.all(query, params);
       return wallets;
     } catch (error) {
       throw new Error(`获取钱包列表失败: ${error.message}`);
