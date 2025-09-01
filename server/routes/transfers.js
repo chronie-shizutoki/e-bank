@@ -8,24 +8,56 @@ const walletRepo = new WalletRepository();
 const transactionRepo = new TransactionRepository();
 
 // 转账输入验证中间件
-const validateTransfer = (req, res, next) => {
-  const { fromWalletId, toWalletId, amount } = req.body;
+const validateTransfer = async (req, res, next) => {
+  const { fromWalletId, toWalletId, fromUsername, toUsername, amount } = req.body;
   
-  if (!fromWalletId || typeof fromWalletId !== 'string') {
+  // 确保要么提供钱包ID，要么提供用户名
+  if ((!fromWalletId && !fromUsername) || typeof fromWalletId !== 'string' && typeof fromUsername !== 'string') {
     return res.status(400).json({
       success: false,
-      error: '发送方钱包ID是必需的'
+      error: '发送方钱包ID或用户名是必需的'
     });
   }
   
-  if (!toWalletId || typeof toWalletId !== 'string') {
+  if ((!toWalletId && !toUsername) || typeof toWalletId !== 'string' && typeof toUsername !== 'string') {
     return res.status(400).json({
       success: false,
-      error: '接收方钱包ID是必需的'
+      error: '接收方钱包ID或用户名是必需的'
     });
   }
   
-  if (fromWalletId === toWalletId) {
+  // 如果同时提供了ID和用户名，检查是否一致
+  if (fromWalletId && fromUsername) {
+    try {
+      const wallet = await walletRepo.findByUsername(fromUsername);
+      if (wallet && wallet.id !== fromWalletId) {
+        return res.status(400).json({
+          success: false,
+          error: '发送方钱包ID与用户名不匹配'
+        });
+      }
+    } catch (error) {
+      console.error('验证钱包与用户名匹配时出错:', error);
+    }
+  }
+  
+  if (toWalletId && toUsername) {
+    try {
+      const wallet = await walletRepo.findByUsername(toUsername);
+      if (wallet && wallet.id !== toWalletId) {
+        return res.status(400).json({
+          success: false,
+          error: '接收方钱包ID与用户名不匹配'
+        });
+      }
+    } catch (error) {
+      console.error('验证钱包与用户名匹配时出错:', error);
+    }
+  }
+  
+  // 不能向自己转账
+  if ((fromWalletId && toWalletId && fromWalletId === toWalletId) || 
+      (fromUsername && toUsername && fromUsername === toUsername)) {
     return res.status(400).json({
       success: false,
       error: '不能向自己转账'
@@ -50,8 +82,18 @@ const validateTransfer = (req, res, next) => {
   next();
 };
 
-// 执行转账
-router.post('/', validateTransfer, async (req, res) => {
+// 执行转账 - 支持钱包ID或用户名
+router.post('/', async (req, res, next) => {
+  try {
+    await validateTransfer(req, res, next);
+  } catch (error) {
+    console.error('转账验证出错:', error);
+    return res.status(500).json({
+      success: false,
+      error: '系统错误，请稍后再试'
+    });
+  }
+}, async (req, res) => {
   await executeTransfer(req, res);
 });
 
@@ -136,14 +178,20 @@ router.post('/by-username', async (req, res) => {
 // 提取转账执行逻辑为独立函数
 async function executeTransfer(req, res) {
   try {
-    const { fromWalletId, toWalletId, amount, description = '' } = req.body;
+    const { fromWalletId, toWalletId, fromUsername, toUsername, amount, description = '' } = req.body;
     
     // 开始数据库事务
     await dbAsync.beginTransaction();
     
     try {
       // 验证发送方钱包存在
-      const fromWallet = await walletRepo.findById(fromWalletId);
+      let fromWallet;
+      if (fromWalletId) {
+        fromWallet = await walletRepo.findById(fromWalletId);
+      } else if (fromUsername) {
+        fromWallet = await walletRepo.findByUsername(fromUsername);
+      }
+      
       if (!fromWallet) {
         await dbAsync.rollback();
         return res.status(404).json({
@@ -153,12 +201,27 @@ async function executeTransfer(req, res) {
       }
       
       // 验证接收方钱包存在
-      const toWallet = await walletRepo.findById(toWalletId);
+      let toWallet;
+      if (toWalletId) {
+        toWallet = await walletRepo.findById(toWalletId);
+      } else if (toUsername) {
+        toWallet = await walletRepo.findByUsername(toUsername);
+      }
+      
       if (!toWallet) {
         await dbAsync.rollback();
         return res.status(404).json({
           success: false,
           error: '接收方钱包不存在'
+        });
+      }
+      
+      // 确保不能向自己转账（额外检查，因为可能混合使用ID和用户名）
+      if (fromWallet.id === toWallet.id) {
+        await dbAsync.rollback();
+        return res.status(400).json({
+          success: false,
+          error: '不能向自己转账'
         });
       }
       
@@ -175,16 +238,16 @@ async function executeTransfer(req, res) {
       
       // 更新发送方余额
       const newFromBalance = parseFloat(fromWallet.balance) - amount;
-      await walletRepo.updateBalance(fromWalletId, newFromBalance);
+      await walletRepo.updateBalance(fromWallet.id, newFromBalance);
       
       // 更新接收方余额
       const newToBalance = parseFloat(toWallet.balance) + amount;
-      await walletRepo.updateBalance(toWalletId, newToBalance);
+      await walletRepo.updateBalance(toWallet.id, newToBalance);
       
       // 创建交易记录
       const transaction = await transactionRepo.create({
-        fromWalletId,
-        toWalletId,
+        fromWalletId: fromWallet.id,
+        toWalletId: toWallet.id,
         amount,
         transactionType: 'transfer',
         description: description || `从 ${fromWallet.username} 转账到 ${toWallet.username}`
@@ -194,8 +257,8 @@ async function executeTransfer(req, res) {
       await dbAsync.commit();
       
       // 获取更新后的钱包信息
-      const updatedFromWallet = await walletRepo.findById(fromWalletId);
-      const updatedToWallet = await walletRepo.findById(toWalletId);
+      const updatedFromWallet = await walletRepo.findById(fromWallet.id);
+      const updatedToWallet = await walletRepo.findById(toWallet.id);
       
       res.status(201).json({
         success: true,
@@ -249,6 +312,8 @@ async function executeTransfer(req, res) {
       error: error.message || '转账失败'
     });
   }
-}
+};
 
+// 导出executeTransfer函数供测试使用
 module.exports = router;
+module.exports.executeTransfer = executeTransfer;

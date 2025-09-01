@@ -79,6 +79,29 @@ class WalletService {
     }
   }
 
+  async transferByUsername(fromUsername, toUsername, amount) {
+    try {
+      this.dispatch({ type: 'SET_LOADING', payload: true })
+      const result = await walletAPI.transferByUsername(fromUsername, toUsername, amount)
+      
+      if (result.success) {
+        // Update wallet balance after successful transfer
+        const currentWallet = JSON.parse(localStorage.getItem('wallet'))
+        if (currentWallet) {
+          await this.getWallet(currentWallet.id)
+        }
+        return result
+      } else {
+        throw new Error(result.error || 'Transfer failed')
+      }
+    } catch (error) {
+      this.dispatch({ type: 'SET_ERROR', payload: error.message })
+      throw error
+    } finally {
+      this.dispatch({ type: 'SET_LOADING', payload: false })
+    }
+  }
+
   async getTransactionHistory(walletId, page = 1, limit = 20) {
     try {
       this.dispatch({ type: 'SET_LOADING', payload: true })

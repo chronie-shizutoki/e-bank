@@ -58,9 +58,15 @@ export const walletAPI = {
     return response.data
   },
 
-  // Execute transfer
+  // Execute transfer by wallet ID
   transfer: async (fromWalletId, toWalletId, amount) => {
     const response = await api.post('/transfers', { fromWalletId, toWalletId, amount })
+    return response.data
+  },
+
+  // Execute transfer by username
+  transferByUsername: async (fromUsername, toUsername, amount) => {
+    const response = await api.post('/transfers/by-username', { fromUsername, toUsername, amount })
     return response.data
   },
 

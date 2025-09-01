@@ -71,9 +71,9 @@ function TransferForm({ onClose, onSuccess }) {
     }
 
     try {
-      const result = await walletService.transfer(
-        currentWallet.id,
-        formData.recipient.trim(), // In a real app, this would be recipient's wallet ID
+      const result = await walletService.transferByUsername(
+        currentWallet.username,
+        formData.recipient.trim(),
         parseFloat(formData.amount)
       )
       
