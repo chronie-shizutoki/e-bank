@@ -1,0 +1,83 @@
+{
+  "wallet": {
+    "title": "Simple Wallet",
+    "balance": "Balance",
+    "transfer": "Transfer",
+    "history": "Transaction History",
+    "create": "Create Wallet",
+    "username": "Username",
+    "initialBalance": "Initial Balance",
+    "currentBalance": "Current Balance",
+    "dashboard": "Wallet Dashboard",
+    "setup": "Wallet Setup",
+    "noWallet": "No Wallet Found",
+    "createFirst": "Please create a wallet first",
+    "initialBalanceNote": "New wallets start with an initial balance of $0.00",
+    "login": "Login to Wallet",
+    "enterUsername": "Enter your username",
+    "noAccount": "Don't have a wallet?",
+    "hasAccount": "Already have a wallet?",
+    "logout": "Logout"
+  },
+  "transfer": {
+    "recipient": "Recipient",
+    "amount": "Amount",
+    "submit": "Confirm Transfer",
+    "success": "Transfer Successful",
+    "failed": "Transfer Failed",
+    "form": "Transfer Form",
+    "enterRecipient": "Enter recipient",
+    "enterAmount": "Enter transfer amount",
+    "processing": "Processing transfer..."
+  },
+  "transaction": {
+    "history": "Transaction History",
+    "type": "Transaction Type",
+    "date": "Date",
+    "amount": "Amount",
+    "from": "From",
+    "to": "To",
+    "noTransactions": "No transactions yet",
+    "loadMore": "Load More",
+    "page": "Page {{current}} of {{total}}",
+    "initialDeposit": "Initial Deposit",
+    "sent": "Sent",
+    "received": "Received",
+    "transfer": "Transfer",
+    "system": "System",
+    "unknown": "Unknown"
+  },
+  "messages": {
+    "insufficient_funds": "Insufficient Funds",
+    "invalid_amount": "Invalid Amount",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Operation successful",
+    "networkError": "Network connection error",
+    "serverError": "Server error",
+    "validationError": "Input validation failed"
+  },
+  "validation": {
+    "required": "This field is required",
+    "minLength": "Minimum {{min}} characters required",
+    "maxLength": "Maximum {{max}} characters allowed",
+    "positiveNumber": "Please enter a positive number",
+    "invalidFormat": "Invalid format"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "refresh": "Refresh",
+    "close": "Close",
+    "submit": "Submit"
+  },
+  "language": {
+    "select": "Select Language",
+    "current": "Current Language"
+  }
+}

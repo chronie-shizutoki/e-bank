@@ -1,0 +1,83 @@
+{
+  "wallet": {
+    "title": "簡單錢包",
+    "balance": "餘額",
+    "transfer": "轉帳",
+    "history": "交易歷史",
+    "create": "創建錢包",
+    "username": "用戶名",
+    "initialBalance": "初始餘額",
+    "currentBalance": "當前餘額",
+    "dashboard": "錢包主頁",
+    "setup": "錢包設置",
+    "noWallet": "未找到錢包",
+    "createFirst": "請先創建錢包",
+    "initialBalanceNote": "新錢包的初始餘額為0元",
+    "login": "登錄錢包",
+    "enterUsername": "請輸入用戶名",
+    "noAccount": "還沒有錢包？",
+    "hasAccount": "已有錢包？",
+    "logout": "退出登錄"
+  },
+  "transfer": {
+    "recipient": "收款人",
+    "amount": "金額",
+    "submit": "確認轉帳",
+    "success": "轉帳成功",
+    "failed": "轉帳失敗",
+    "form": "轉帳表單",
+    "enterRecipient": "請輸入收款人",
+    "enterAmount": "請輸入轉帳金額",
+    "processing": "轉帳處理中..."
+  },
+  "transaction": {
+    "history": "交易歷史",
+    "type": "交易類型",
+    "date": "日期",
+    "amount": "金額",
+    "from": "發送方",
+    "to": "接收方",
+    "noTransactions": "暫無交易記錄",
+    "loadMore": "載入更多",
+    "page": "第 {{current}} 頁，共 {{total}} 頁",
+    "initialDeposit": "初始存款",
+    "sent": "轉出",
+    "received": "轉入",
+    "transfer": "轉帳",
+    "system": "系統",
+    "unknown": "未知"
+  },
+  "messages": {
+    "insufficient_funds": "餘額不足",
+    "invalid_amount": "無效金額",
+    "loading": "載入中...",
+    "error": "發生錯誤",
+    "success": "操作成功",
+    "networkError": "網路連接錯誤",
+    "serverError": "伺服器錯誤",
+    "validationError": "輸入驗證失敗"
+  },
+  "validation": {
+    "required": "此欄位為必填項",
+    "minLength": "最少需要 {{min}} 個字符",
+    "maxLength": "最多允許 {{max}} 個字符",
+    "positiveNumber": "請輸入正數",
+    "invalidFormat": "格式不正確"
+  },
+  "common": {
+    "cancel": "取消",
+    "confirm": "確認",
+    "back": "返回",
+    "next": "下一步",
+    "save": "保存",
+    "edit": "編輯",
+    "delete": "刪除",
+    "refresh": "重新整理",
+    "close": "關閉",
+    "submit": "提交"
+  },
+  "language": {
+    "select": "選擇語言",
+    "current": "當前語言"
+  }
+}
