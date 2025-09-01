@@ -23,6 +23,13 @@ CREATE TABLE IF NOT EXISTS transactions (
   FOREIGN KEY (to_wallet_id) REFERENCES wallets(id)
 );
 
+-- 创建汇率表
+CREATE TABLE IF NOT EXISTS exchange_rates (
+  id TEXT PRIMARY KEY,
+  rate REAL NOT NULL,
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
 -- 创建索引以优化查询性能
 CREATE INDEX IF NOT EXISTS idx_wallets_username ON wallets(username);
 

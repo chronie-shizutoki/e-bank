@@ -10,6 +10,8 @@ const { initializeDatabase } = require('./config/initDatabase');
 
 // 导入利息调度器
 const interestScheduler = require('./services/InterestScheduler');
+// 导入汇率调度器
+const exchangeRateScheduler = require('./services/ExchangeRateScheduler');
 
 const app = express();
 
@@ -69,6 +71,7 @@ app.use('/api/wallets', require('./routes/wallets'));
 app.use('/api/transfers', require('./routes/transfers'));
 app.use('/api/transactions', require('./routes/transactions'));
 app.use('/api/interests', require('./routes/interests'));
+app.use('/api/exchange-rates', require('./routes/exchangeRates'));
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -111,6 +114,17 @@ async function startServer() {
       } catch (error) {
         console.error('启动利息调度器时发生异常:', error);
         console.warn('利息调度器无法启动，但服务器继续运行');
+      }
+
+      // 启动汇率调度器
+      try {
+        const rateSchedulerResult = await exchangeRateScheduler.start();
+        if (!rateSchedulerResult.success) {
+          console.warn('汇率调度器启动失败，但服务器继续运行');
+        }
+      } catch (error) {
+        console.error('启动汇率调度器时发生异常:', error);
+        console.warn('汇率调度器无法启动，但服务器继续运行');
       }
     });
   } catch (error) {
