@@ -8,9 +8,9 @@ const exchangeRateService = require('./ExchangeRateService');
 class ExchangeRateScheduler {
   constructor() {
     this.job = null;
-    // 汇率范围：1美元 = 200-10000本地货币
-    this.minRate = 200;
-    this.maxRate = 10000;
+    // Exchange rate range: 1 USD = 2000-3000 local currency. Adjusted to a more reasonable range.
+    this.minRate = 1500;
+    this.maxRate = 2500;
   }
 
   /**
