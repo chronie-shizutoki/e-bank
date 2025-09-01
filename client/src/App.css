@@ -83,8 +83,6 @@ body {
 .app-main {
   flex: 1;
   padding: 1rem;
-  max-width: 1200px;
-  margin: 0 auto;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -724,7 +722,7 @@ body {
 /* Transaction History Component */
 .transaction-history {
   padding: 1rem;
-  max-width: min(1000px, 95vw);
+  max-width: min(1400px, 95vw);
   margin: 0 auto;
   width: 100%;
 }
@@ -1034,12 +1032,12 @@ body {
 
 @media (min-width: 1200px) {
   .app-main {
-    max-width: 1400px;
+    padding: 2rem;
   }
   
   .wallet-dashboard,
   .transaction-history {
-    max-width: min(1200px, 80vw);
+    max-width: min(1400px, 95vw);
   }
   
   .wallet-setup__container {
