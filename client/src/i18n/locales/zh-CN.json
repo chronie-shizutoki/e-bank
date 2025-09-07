@@ -1,95 +1,95 @@
 {
-  "wallet": {
-    "title": "𝙲𝚑𝚛𝚢𝚜𝚘𝚛𝚛𝚑𝚘𝚎（黄金流动）",
-    "balance": "余额",
-    "transfer": "转账",
-    "history": "交易历史",
-    "create": "创建钱包",
-    "username": "用户名",
-    "initialBalance": "初始余额",
-    "currentBalance": "当前余额",
-    "dashboard": "钱包主页",
-    "setup": "钱包设置",
-    "noWallet": "未找到钱包",
-    "createFirst": "请先创建钱包",
-    "initialBalanceNote": "新钱包的初始余额为0元",
-    "login": "登录钱包",
-    "enterUsername": "请输入用户名",
-    "noAccount": "还没有钱包？",
-    "hasAccount": "已有钱包？",
-    "logout": "退出登录",
-    "createdAt": "创建时间",
-    "walletId": "钱包ID",
-    "balanceLow": "余额较低",
-    "balanceSufficient": "余额充足"
-  },
-  "transfer": {
-    "recipient": "收款人",
-    "amount": "金额",
-    "submit": "确认转账",
-    "success": "转账成功",
-    "failed": "转账失败",
-    "form": "转账表单",
-    "enterRecipient": "请输入收款人",
-    "enterAmount": "请输入转账金额",
-    "processing": "转账处理中..."
-  },
-  "transaction": {
-    "history": "交易历史",
-    "type": "交易类型",
-    "date": "日期",
-    "amount": "金额",
-    "from": "发送方",
-    "to": "接收方",
-    "noTransactions": "暂无交易记录",
-    "loadMore": "加载更多",
-    "page": "第 {{current}} 页，共 {{total}} 页",
-    "initialDeposit": "初始存款",
-    "sent": "转出",
-    "received": "转入",
-    "transfer": "转账",
-    "system": "系统",
-    "unknown": "未知"
-  },
-  "messages": {
-    "insufficient_funds": "余额不足",
-    "invalid_amount": "无效金额",
-    "loading": "加载中...",
-    "error": "发生错误",
-    "success": "操作成功",
-    "networkError": "网络连接错误",
-    "serverError": "服务器错误",
-    "validationError": "输入验证失败"
-  },
-  "validation": {
-    "required": "此字段为必填项",
-    "minLength": "最少需要 {{min}} 个字符",
-    "maxLength": "最多允许 {{max}} 个字符",
-    "positiveNumber": "请输入正数",
-    "invalidFormat": "格式不正确"
-  },
-  "common": {
-    "cancel": "取消",
-    "confirm": "确认",
-    "back": "返回",
-    "next": "下一步",
-    "save": "保存",
-    "edit": "编辑",
-    "delete": "删除",
-    "refresh": "刷新",
-    "close": "关闭",
-    "submit": "提交"
-  },
-  "language": {
-    "select": "选择语言",
-    "current": "当前语言"
-  },
-  "accessibility": {
-    "skipToMain": "跳转到主要内容"
-  },
-  "exchangeRate": {
-    "title": "汇率信息",
-    "rate": "1美元 = {{rate}} 此货币",
-    "lastUpdated": "最后更新: {{time}}"
-  }
+"wallet": {
+"title": "金流 (𝙲𝚑𝚛𝚢𝚜𝚘𝚛𝚛𝚑𝚘𝚎)",
+"balance": "余额",
+"transfer": "转账",
+"history": "交易记录",
+"create": "创建钱包",
+"username": "用户名",
+"initialBalance": "初始余额",
+"currentBalance": "当前余额",
+"dashboard": "钱包首页",
+"setup": "钱包设置",
+"noWallet": "未找到钱包",
+"createFirst": "请先创建钱包",
+"initialBalanceNote": "新钱包初始余额为0.00元",
+"login": "登录钱包",
+"enterUsername": "输入用户名",
+"noAccount": "没有钱包账户？",
+"hasAccount": "已有钱包账户？",
+"logout": "退出登录",
+"createdAt": "创建时间",
+"walletId": "钱包ID",
+"balanceLow": "余额不足",
+"balanceSufficient": "余额充足"
+},
+"transfer": {
+"recipient": "收款方",
+"amount": "金额",
+"submit": "确认转账",
+"success": "转账成功",
+"failed": "转账失败",
+"form": "转账详情",
+"enterRecipient": "输入收款方用户名",
+"enterAmount": "输入转账金额",
+"processing": "处理中..."
+},
+"transaction": {
+"history": "交易记录",
+"type": "交易类型",
+"date": "日期",
+"amount": "金额",
+"from": "付款方",
+"to": "收款方",
+"noTransactions": "暂无交易记录",
+"loadMore": "加载更多",
+"page": "第 {{current}} 页/共 {{total}} 页",
+"initialDeposit": "初始存入",
+"sent": "转出",
+"received": "转入",
+"transfer": "转账",
+"system": "系统",
+"unknown": "未知"
+},
+"messages": {
+"insufficient_funds": "余额不足，请充值",
+"invalid_amount": "金额无效",
+"loading": "加载中...",
+"error": "发生错误",
+"success": "操作成功",
+"networkError": "网络连接异常",
+"serverError": "服务器错误",
+"validationError": "请输入有效信息"
+},
+"validation": {
+"required": "请填写此字段",
+"minLength": "至少需要 {{min}} 个字符",
+"maxLength": "不能超过 {{max}} 个字符",
+"positiveNumber": "请输入正数",
+"invalidFormat": "格式不正确"
+},
+"common": {
+"cancel": "取消",
+"confirm": "确认",
+"back": "返回",
+"next": "下一步",
+"save": "保存",
+"edit": "编辑",
+"delete": "删除",
+"refresh": "刷新",
+"close": "关闭",
+"submit": "提交"
+},
+"language": {
+"select": "选择语言",
+"current": "当前语言"
+},
+"accessibility": {
+"skipToMain": "跳过导航"
+},
+"exchangeRate": {
+"title": "汇率",
+"rate": "1美元 = {{rate}} 本地货币",
+"lastUpdated": "更新时间：{{time}}"
+}
 }
