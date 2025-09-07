@@ -14,35 +14,40 @@ class ExchangeRateService {
   /**
    * 保存汇率记录
    * @param {number} rate - 汇率值（1美元兑换的本地货币数量）
+   * @param {Date|string} [createdAt] - 可选的创建时间，默认为当前时间
    * @returns {Promise<Object>} 保存结果
    */
-  async saveRate(rate) {
+  async saveRate(rate, createdAt = null) {
     try {
       // 验证汇率值
       if (typeof rate !== 'number' || rate < 0) {
-        throw new Error('无效的汇率值，必须是正数');
+        throw new Error('Invalid exchange rate value, must be a positive number');
       }
 
       // 生成UUID作为ID
       const id = uuidv4();
-      const createdAt = new Date().toISOString();
+      // 如果没有提供创建时间，使用当前时间
+      let createdTime = new Date().toISOString();
+      if (createdAt) {
+        createdTime = createdAt instanceof Date ? createdAt.toISOString() : createdAt;
+      }
 
       // 插入数据库
       await dbAsync.run(
         `INSERT INTO ${this.tableName} (id, rate, created_at) VALUES (?, ?, ?)`,
-        [id, rate, createdAt]
+        [id, rate, createdTime]
       );
 
-      console.log(`成功保存汇率记录: 1美元 = ${rate} 本地货币`);
+      console.log(`Successfully saved exchange rate record: 1 USD = ${rate} local currency`);
 
       return {
         success: true,
         id,
         rate,
-        createdAt
+        createdAt: createdTime
       };
     } catch (error) {
-      console.error('保存汇率记录时出错:', error);
+      console.error('Error saving exchange rate record:', error);
       return {
         success: false,
         message: error.message
