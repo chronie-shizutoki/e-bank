@@ -10,8 +10,8 @@ class InterestService {
   constructor() {
     this.walletRepo = new WalletRepository();
     this.transactionRepo = new TransactionRepository();
-    // 默认日利率 (-1% = -0.01)
-    this.dailyInterestRate = -0.01;
+    // 默认日利率 (1% = 0.01)，一个合理的范围应该年化1%左右，即日利率0.003%~0.004%
+    this.dailyInterestRate = 0.00003;
   }
 
   /**
