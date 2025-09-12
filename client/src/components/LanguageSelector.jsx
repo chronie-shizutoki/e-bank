@@ -1,6 +1,6 @@
+import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useWallet } from '../context/WalletContext'
-import { useEffect } from 'react'
 import { languageStorage } from '../utils/languageStorage'
 
 const languages = [
@@ -13,6 +13,8 @@ const languages = [
 function LanguageSelector() {
   const { i18n } = useTranslation()
   const { currentLanguage, dispatch } = useWallet()
+  const [isOpen, setIsOpen] = useState(false)
+  const dropdownRef = useRef(null)
 
   // Sync i18n language with wallet context on mount
   useEffect(() => {
@@ -21,28 +23,61 @@ function LanguageSelector() {
     }
   }, [i18n, currentLanguage])
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
+
   const handleLanguageChange = (languageCode) => {
     if (languageStorage.isSupported(languageCode)) {
       i18n.changeLanguage(languageCode)
       dispatch({ type: 'SET_LANGUAGE', payload: languageCode })
       languageStorage.setLanguage(languageCode)
+      setIsOpen(false)
     }
   }
 
+  const getCurrentLanguageName = () => {
+    const language = languages.find(lang => lang.code === currentLanguage)
+    return language ? language.name : currentLanguage
+  }
+
   return (
-    <div className="language-selector">
-      <select 
-        value={currentLanguage} 
-        onChange={(e) => handleLanguageChange(e.target.value)}
-        className="language-select"
+    <div className="language-selector" ref={dropdownRef}>
+      <button
+        className={`language-select-button ${isOpen ? 'open' : ''}`}
+        onClick={() => setIsOpen(!isOpen)}
         aria-label="Select Language"
+        aria-expanded={isOpen}
       >
-        {languages.map((lang) => (
-          <option key={lang.code} value={lang.code}>
-            {lang.name}
-          </option>
-        ))}
-      </select>
+        <span className="language-select-text">{getCurrentLanguageName()}</span>
+        <span className={`language-select-arrow ${isOpen ? 'open' : ''}`}>
+          ▼
+        </span>
+      </button>
+      {isOpen && (
+        <div className="language-select-dropdown">
+          {languages.map((lang) => (
+            <button
+              key={lang.code}
+              className={`language-select-option ${currentLanguage === lang.code ? 'selected' : ''}`}
+              onClick={() => handleLanguageChange(lang.code)}
+              role="option"
+              aria-selected={currentLanguage === lang.code}
+            >
+              {lang.name}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

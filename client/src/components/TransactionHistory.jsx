@@ -98,7 +98,7 @@ const TransactionHistory = () => {
   if (!currentWallet) {
     return (
       <div className="transaction-history">
-        <div className="no-wallet-message">
+        <div className="no-wallet-message glass-card">
           <p>{t('wallet.noWallet')}</p>
         </div>
       </div>
@@ -112,7 +112,7 @@ const TransactionHistory = () => {
   if (error) {
     return (
       <div className="transaction-history">
-        <div className="error-message">
+        <div className="error-message glass-card">
           <p>{t('messages.error')}: {error}</p>
           <button 
             onClick={() => loadTransactions(1)}
@@ -149,14 +149,14 @@ const TransactionHistory = () => {
       </div>
 
       {transactions.length === 0 ? (
-        <div className="no-transactions">
+        <div className="no-transactions glass-card">
           <p>{t('transaction.noTransactions')}</p>
         </div>
       ) : (
         <>
           <div className="transaction-list">
             {transactions.map((transaction) => (
-              <div key={transaction.id} className="transaction-item">
+              <div key={transaction.id} className="transaction-item glass-card">
                 <div className="transaction-main">
                   <div className="transaction-info">
                     <div className="transaction-type">

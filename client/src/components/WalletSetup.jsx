@@ -90,7 +90,7 @@ function WalletSetup() {
 
   return (
     <div className="wallet-setup">
-      <div className="wallet-setup__container">
+      <div className="wallet-setup__container glass-card">
         <h1 className="wallet-setup__title">
           {mode === 'login' ? t('wallet.login') : t('wallet.create')}
         </h1>

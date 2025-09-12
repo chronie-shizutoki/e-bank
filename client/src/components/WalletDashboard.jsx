@@ -73,7 +73,7 @@ function WalletDashboard() {
           </div>
         )}
 
-        <div className="wallet-dashboard__balance-card">
+        <div className="wallet-dashboard__balance-card glass-card">
           <div className="balance-card__header">
             <h2 className="balance-card__title">{t('wallet.currentBalance')}</h2>
           </div>
@@ -122,7 +122,7 @@ function WalletDashboard() {
           </button>
         </div>
 
-        <div className="wallet-dashboard__info">
+        <div className="wallet-dashboard__info glass-card">
           <div className="info-item">
             <span className="info-label">{t('wallet.createdAt')}:</span>
             <span className="info-value">

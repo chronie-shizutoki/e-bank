@@ -108,7 +108,7 @@ function TransferForm({ onClose, onSuccess }) {
 
   return (
     <div className="transfer-form-overlay">
-      <div className="transfer-form">
+      <div className="transfer-form glass-modal">
         <div className="transfer-form__header">
           <h2 className="transfer-form__title">{t('transfer.form')}</h2>
           <button 
