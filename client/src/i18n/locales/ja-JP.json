@@ -89,7 +89,7 @@
 },
 "exchangeRate": {
 "title": "為替レート",
-"rate": "1米ドル = {{rate}} 現地通貨",
-"lastUpdated": "最終更新: {{time}}"
+"rate": "1米ドル = {{rate}}",
+"lastUpdated": "{{time}}"
 }
 }

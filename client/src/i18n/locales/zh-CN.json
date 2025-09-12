@@ -89,7 +89,7 @@
 },
 "exchangeRate": {
 "title": "汇率",
-"rate": "1美元 = {{rate}} 本地货币",
-"lastUpdated": "更新时间：{{time}}"
+"rate": "1美元 = {{rate}}",
+"lastUpdated": "{{time}}"
 }
 }

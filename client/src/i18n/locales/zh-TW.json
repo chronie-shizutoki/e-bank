@@ -89,7 +89,7 @@
 },
 "exchangeRate": {
 "title": "匯率資訊",
-"rate": "1美元 = {{rate}} 當地貨幣",
-"lastUpdated": "最後更新時間：{{time}}"
+"rate": "1美元 = {{rate}}",
+"lastUpdated": "{{time}}"
 }
 }

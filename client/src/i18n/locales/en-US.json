@@ -89,7 +89,7 @@
 },
 "exchangeRate": {
 "title": "Exchange Rates",
-"rate": "1 USD = {{rate}} Local Currency",
-"lastUpdated": "Last updated: {{time}}"
+"rate": "1 USD = {{rate}}",
+"lastUpdated": "{{time}}"
 }
 }
